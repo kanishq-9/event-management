@@ -1,0 +1,19 @@
+{
+  "name": "eventmanagement",
+  "version": "1.0.0",
+  "description": "managing events",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanishq-9/event-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kanishq-9/event-management/issues"
+  },
+  "homepage": "https://github.com/kanishq-9/event-management#readme"
+}

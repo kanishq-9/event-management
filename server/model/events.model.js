@@ -1,0 +1,1 @@
+const {eventManager} = require('./schemas/events.schema');

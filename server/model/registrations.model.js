@@ -1,0 +1,1 @@
+const {registerManager} = require('./schemas/registrations.schema');
