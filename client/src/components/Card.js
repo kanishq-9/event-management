@@ -3,7 +3,7 @@ import { GoPeople } from "react-icons/go";
 import ShowDeleteMessage from "./ShowDeleteMessage";
 import Viewcard from "./Viewcard";
 
-function Card({title, location, date_time, max_capacity, description, created_by, id, onEventChange}) {
+function Card({title, location, date_time, max_capacity, description, created_by, id, onEventChange, userRegistrationData, onRegistrationChange}) {
     const [isAdmin, setIsAdmin] = useState(false);
     const [showDeleteMessage, setShowDeleteMessage] = useState(false);
     const [showViewCard, setShowViewCard] = useState(false);
@@ -19,7 +19,7 @@ function Card({title, location, date_time, max_capacity, description, created_by
     }
 
   return (
-    <div className="card shadow-sm m-3" style={{ maxWidth: "22rem" }}>
+    <div className="card shadow-sm m-3" style={{ width: "22rem" }}>
       <div className="card-body">
         <GoPeople />
         <h5 className="card-title">{title}</h5>
@@ -45,7 +45,7 @@ function Card({title, location, date_time, max_capacity, description, created_by
         }
       </div>
       {showDeleteMessage?<ShowDeleteMessage onEventChange={onEventChange} eventId={id} title={title} description={description} onClose={() => setShowDeleteMessage(false)} />:null}
-      {showViewCard?<Viewcard isAdmin={isAdmin} onEventChange={onEventChange} eventId={id} title={title} description={description} onClose={() => setShowViewCard(false)} />:null}
+      {showViewCard?<Viewcard location={location} date_time={date_time} max_capacity={max_capacity} onRegistrationChange={onRegistrationChange} userRegistrationData={userRegistrationData} isAdmin={isAdmin} onEventChange={onEventChange} eventId={id} title={title} description={description} onClose={() => setShowViewCard(false)} />:null}
     </div>
   );
 }

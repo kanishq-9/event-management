@@ -8,16 +8,34 @@ function Home() {
   const [navHeight, setNavHeight] = useState(0);
   const [events, setEvents] = useState([]);
   const [showCards, setShowcards] = useState(false);
+  const [userRegistrationData, setUserRegistrationData] = useState([]);
   const URL = process.env.REACT_APP_FETCH_URL;
+  
   useEffect(()=>{
     if (navRef.current) {
       setNavHeight(navRef.current.offsetHeight);
     }
   },[]);
 
+  const fetchSingleUserRegistration = useCallback(async()=>{
+    try{
+      const id = sessionStorage.getItem("id");
+      const response = await fetch(URL+`/api/users/${id}/registrations`);
+      const data = await response.json();
+      if(data.success){
+        setUserRegistrationData(data.data);
+      }
+      
+    }catch(err){
+      console.error('Error fetching: '+ err);
+    }
+  },[URL])
+
+
+
   function handleCardsShow(){
     return events.map(event=>{
-      return <Card key={event._id} date_time={event.date_time} title={event.title} description={event.description} location={event.location} max_capacity={event.max_capacity} created_by={event.created_by} id={event._id} onEventChange={fetchEvent}/>
+      return <Card userRegistrationData={userRegistrationData} key={event._id} date_time={event.date_time} title={event.title} description={event.description} location={event.location} max_capacity={event.max_capacity} created_by={event.created_by} id={event._id} onEventChange={fetchEvent} onRegistrationChange={fetchSingleUserRegistration}/>
     })
   }
 
@@ -38,7 +56,8 @@ function Home() {
 
   useEffect(()=>{
     fetchEvent();
-  },[fetchEvent]);
+    fetchSingleUserRegistration();
+  },[fetchEvent, fetchSingleUserRegistration]);
 
   return (
     <>

@@ -19,7 +19,7 @@ const registrationSchema = new mongo.Schema({
     status:{
         type: String,
     enum: ["confirmed", "cancelled"],
-    default: "pending"
+    default: "confirmed"
     }
 });
 const registerManager = mongo.model("Registrations",registrationSchema);
