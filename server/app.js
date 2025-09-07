@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const helmet = require('helmet');
 const {routeAuthHandler} = require('./routes/auth.route');
-const routeEventHandler = require('./routes/event.route');
+const {routeEventHandler} = require('./routes/event.route');
 const routeRegistrationHandler = require('./routes/registration.route');
 
 app.use(cors());
@@ -17,6 +17,6 @@ app.use('/api/auth',routeAuthHandler);
 // app.use('/api',routeRegistrationHandler);
 
 //Event Management 
-// app.use('/api',routeEventHandler);
+app.use('/api',routeEventHandler);
 
 module.exports = {app};

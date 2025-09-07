@@ -3,7 +3,7 @@ import "./css/navbar.css";
 import { NavLink } from "react-router-dom";
 import CreateEventForm from "./CreateEventForm";
 
-const Navbar= forwardRef((props, ref)=>{
+const Navbar= forwardRef(({onEventCreated}, ref)=>{
     const [showForm, setShowForm] = useState(false);
     function handleForm(){
         setShowForm(true);
@@ -15,7 +15,7 @@ const Navbar= forwardRef((props, ref)=>{
     <>
     <nav ref={ref} className="navbar fixed-top navbar-expand-lg navbar-dark bg-primary shadow-lg px-3">
       <div className="navbar-brand fw-bold text-uppercase">
-        <span className="text-dark">Event</span> <span className="text-light">Management</span> <span>System</span>
+        <span className="text-dark">Event</span> <span className="text-light">Management</span>
       </div>
 
       <button
@@ -62,7 +62,7 @@ const Navbar= forwardRef((props, ref)=>{
         </form>
       </div>
     </nav>
-    {showForm && <CreateEventForm onClose={() => setShowForm(false)} />}
+    {showForm && <CreateEventForm onClose={() => setShowForm(false)} onEventCreated={onEventCreated}/>}
     </>
   );
 });

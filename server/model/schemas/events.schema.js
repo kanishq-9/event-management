@@ -18,7 +18,7 @@ const eventSchema = new mongo.Schema({
         required:true
     }, 
     max_capacity:{
-        type: number,
+        type: Number,
         required:true
     }, 
     created_by:{
