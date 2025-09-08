@@ -7,7 +7,15 @@ const {routeEventHandler} = require('./routes/event.route');
 const {routeRegistrationHandler} = require('./routes/registration.route');
 
 app.use(cors());
-app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "https://cdn.jsdelivr.net"],      
+    scriptSrcElem: ["'self'", "https://cdn.jsdelivr.net"],   
+    styleSrc: ["'self'", "https:", "'unsafe-inline'"],
+    imgSrc: ["'self'", "data:", "https:"],
+  },
+}));
 app.use(express.json());
 
 //auth
