@@ -20,6 +20,7 @@ function Viewcard({
     const [disable, setDisable] = useState(false);
     const [totalRegistered, setTotalRegistered] = useState(0);
     const [cardMessage, setCardMessage] = useState(null);
+    const [maxMessage, setmaxMessage] = useState(null);
 
     useEffect(() => {
         if (!isAdmin && userRegistrationData?.length > 0) {
@@ -67,6 +68,9 @@ function Viewcard({
         if (data.success) {
             onRegistrationChange();
             onClose();
+        }if(data.success===false && data.message){
+            setmaxMessage(data.message);
+            setDisable(true);
         }
     }
 
@@ -96,6 +100,7 @@ function Viewcard({
                             <h6 className="mb-1">Location: {location}</h6>
                             <h6 className="mb-1">Date: {new Date(date_time).toISOString().split("T")[0]}</h6>
                             <h6 className="mb-1">Total Registered: {totalRegistered}/{max_capacity}</h6>
+                            {maxMessage?<h6 className="mb-1">max capacity reached</h6>:null}
                             <div className="d-flex justify-content-end gap-2">
                                 {isAdmin ?
                                     (

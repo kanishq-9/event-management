@@ -31,7 +31,7 @@ async function createRegistrationDB(user_id, event_id) {
         const userRegisteredForEvent = await getUserRegisteredByEventId(event_id);        
         if(userRegisteredForEvent.success && eventData.success){
             if(userRegisteredForEvent.data.length === eventData.data.max_capacity){
-                throw new Error("Max Limit Reached");
+                return {success:false,message:"Max Limit Reached"};
             }
         }
         user_id = new mongo.Types.ObjectId(user_id);
