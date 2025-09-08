@@ -35,7 +35,6 @@ function Viewcard({
             const response = await fetch(URL + "/api/events/" + eventId);
 
             const data = await response.json();
-            console.log(data);
             if (data.success) {
                 setTotalRegistered(data.data.total_registered);
             } if (data.success === false) {
