@@ -38,7 +38,7 @@ function Viewcard({
             const data = await response.json();
             if (data.success) {
                 if (data.data.total_registered === max_capacity) {
-                    setmaxMessage(data.message);
+                    setmaxMessage("Max Participant reached!!");
                     setDisable(true);
                 }
                 setTotalRegistered(data.data.total_registered);
