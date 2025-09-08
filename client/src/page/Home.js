@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
+import { useNavigate } from 'react-router';
 import './css/home.css';
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
@@ -10,6 +11,16 @@ function Home() {
   const [showCards, setShowcards] = useState(false);
   const [userRegistrationData, setUserRegistrationData] = useState([]);
   const URL = process.env.REACT_APP_FETCH_URL;
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    const currentUserId = sessionStorage.getItem("id");
+    const currentUserName = sessionStorage.getItem("name");
+    const currentUserEmail = sessionStorage.getItem("email");
+    if(!currentUserEmail || !currentUserId || !currentUserName){
+      navigate("/login");
+    }
+  },[]);
   
   useEffect(()=>{
     if (navRef.current) {
