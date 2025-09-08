@@ -1,4 +1,4 @@
-# MatchMaking
+# Event Management
 A full-stack event management platform which helps user to create, register, delete, unregister for an event. Built with React, Node.js, Express, and MongoDB.
 
 ## Features
