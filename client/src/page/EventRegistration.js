@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import './css/eventregistration.css';
 import Navbar from '../components/Navbar';
 import Table from '../components/Table';
+import { useNavigate } from 'react-router';
+
+
+
 
 function EventRegistration() {
   const navRef = useRef(null);
@@ -9,6 +13,15 @@ function EventRegistration() {
   const [navHeight, setNavHeight] = useState(0);
   const [userRegistrationData, setUserRegistrationData] = useState([]);
   const [events, setEvents] = useState([]);
+  const navigate = useNavigate();
+  useEffect(()=>{
+    const currentUserId = sessionStorage.getItem("id");
+    const currentUserName = sessionStorage.getItem("name");
+    const currentUserEmail = sessionStorage.getItem("email");
+    if(!currentUserEmail || !currentUserId || !currentUserName){
+      navigate("/login");
+    }
+  },[]);
   useEffect(() => {
     if (navRef.current) {
       setNavHeight(navRef.current.offsetHeight);
