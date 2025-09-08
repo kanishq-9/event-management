@@ -37,6 +37,10 @@ function Viewcard({
 
             const data = await response.json();
             if (data.success) {
+                if (data.data.total_registered === max_capacity) {
+                    setmaxMessage(data.message);
+                    setDisable(true);
+                }
                 setTotalRegistered(data.data.total_registered);
             } if (data.success === false) {
                 setCardMessage(data.message);
@@ -68,9 +72,6 @@ function Viewcard({
         if (data.success) {
             onRegistrationChange();
             onClose();
-        }if(data.success===false && data.message){
-            setmaxMessage(data.message);
-            setDisable(true);
         }
     }
 
@@ -100,7 +101,7 @@ function Viewcard({
                             <h6 className="mb-1">Location: {location}</h6>
                             <h6 className="mb-1">Date: {new Date(date_time).toISOString().split("T")[0]}</h6>
                             <h6 className="mb-1">Total Registered: {totalRegistered}/{max_capacity}</h6>
-                            {maxMessage?<h6 className="mb-1">Sorry Could not register!!max capacity reached</h6>:null}
+                            {maxMessage ? <h6 className="mb-1">Sorry Could not register!!max capacity reached</h6> : null}
                             <div className="d-flex justify-content-end gap-2">
                                 {isAdmin ?
                                     (
