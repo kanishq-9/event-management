@@ -42,7 +42,7 @@ eventmanagement/
 ```
 mkdir eventmanagement
 cd ./eventmanagement
-git clone <your-repo-url>
+git clone https://github.com/kanishq-9/event-management.git
 ```
 ### 2.Install backend dependencies:
 ```
