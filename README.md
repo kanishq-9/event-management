@@ -91,3 +91,5 @@ helmet.contentSecurityPolicy({
   },
 });
 ```
+# Architecture
+<img width="849" height="397" alt="MERNArchitecture" src="https://github.com/user-attachments/assets/b8d1934b-5fa6-46b5-9661-55f7f3d5b2b7" />
