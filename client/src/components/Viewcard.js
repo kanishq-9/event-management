@@ -21,9 +21,9 @@ function Viewcard({
     const [totalRegistered, setTotalRegistered] = useState(0);
 
     useEffect(() => {
-        if (!isAdmin && userRegistrationData.length > 0) {
+        if (!isAdmin && userRegistrationData?.length > 0) {
             const singleData = userRegistrationData.filter(registeredEvent => eventId === registeredEvent.event_id);
-            if (singleData.length > 0) {
+            if (singleData?.length > 0) {
                 setDisable(true);
             }
         }

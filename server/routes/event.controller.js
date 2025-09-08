@@ -1,5 +1,5 @@
-const { createEventDB, getEventDB, deleteEventById, updateEventById, getEventById } = require('./../model/events.model');
-
+const { createEventDB, getEventDB, deleteEventById, updateEventById } = require('./../model/events.model');
+const {getEventById} = require("./../model/events.helper");
 async function createEventHTML(req, res) {
     try {
         const { title, description, date_time, location, max_capacity, created_by } = req.body;

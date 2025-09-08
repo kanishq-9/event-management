@@ -1,6 +1,6 @@
 const { eventManager } = require('./schemas/events.schema');
+const {getEventById} = require('./events.helper');
 const mongo = require('mongoose');
-const {getUserRegisteredByEventId} = require('./registrations.model');
 
 async function createEventDB(title, description, date_time, location, max_capacity, created_by) {
     try {
@@ -32,7 +32,7 @@ async function deleteEventById(id) {
             throw new Error('Missing data');
         }
         const _id = new mongo.Types.ObjectId(id);
-        await eventManager.delete({ _id });
+        await eventManager.deleteOne({ _id });
         return { success: true }
 
     } catch (err) {
@@ -40,21 +40,6 @@ async function deleteEventById(id) {
     }
 }
 
-async function getEventById(id) {
-    try {
-        if (!id) {
-            throw new Error('Missing data');
-        }
-        const _id = new mongo.Types.ObjectId(id);
-        let response = await eventManager.findById({ _id });
-        response= response.toObject();
-        const usersRegistered = await getUserRegisteredByEventId(id);  
-        response["total_registered"] = usersRegistered.data.length;
-        return { success: true, data: response };
-    } catch (err) {
-        throw new Error('some Error Occurred : ' + err);
-    }
-}
 
 async function updateEventById(
     id,
@@ -97,4 +82,4 @@ async function updateEventById(
     }
 }
 
-module.exports = { createEventDB, getEventDB, deleteEventById, updateEventById, getEventById }
+module.exports = { createEventDB, getEventDB, deleteEventById, updateEventById }

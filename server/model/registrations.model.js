@@ -1,6 +1,6 @@
 const mongo  = require('mongoose');
 const {registerManager} = require('./schemas/registrations.schema');
-const {getEventById} = require("./events.model");
+const {getEventById, getUserRegisteredByEventId} = require("./events.helper");
 
 async function getRegistrationByEventDB(user_id, event_id) {
     try{
@@ -19,31 +19,16 @@ async function getRegistrationByEventDB(user_id, event_id) {
     }
 }
 
-async function getUserRegisteredByEventId(event_id) {
-    try{
-        if(!event_id){
-            throw new Error("Missing data");
-        }
-        event_id = new mongo.Types.ObjectId(event_id);
-        const data = await registerManager.find({event_id});
-        if(data.length==0){
-            return {success:false};
-        }
-        return {success:true, data}
-    }catch(err){
-        throw new Error("Some Error Occurred: "+err);
-    }
-}
+
 
 async function createRegistrationDB(user_id, event_id) {
     try{
         if(!user_id || !event_id){
             throw new Error("Mission data");
-        }
-        const isPresent = await getRegistrationByEventDB(user_id, event_id);
+        }        
+        const isPresent = await getRegistrationByEventDB(user_id, event_id);        
         const eventData = await getEventById(event_id);
-        const userRegisteredForEvent = await getUserRegisteredByEventId(event_id);
-        
+        const userRegisteredForEvent = await getUserRegisteredByEventId(event_id);        
         if(userRegisteredForEvent.success && eventData.success){
             if(userRegisteredForEvent.data.length === eventData.data.max_capacity){
                 throw new Error("Max Limit Reached");
@@ -56,6 +41,22 @@ async function createRegistrationDB(user_id, event_id) {
         }
         const data = await registerManager.insertOne({user_id, event_id});
         return {success:true, data}
+    }catch(err){
+        throw new Error("Some Error Occurred: "+err);
+    }
+}
+
+
+async function deleteRegistrationDB(user_id, event_id) {
+    try{
+        if(!user_id || !event_id){
+            throw new Error("Mission data");
+        }
+        user_id = new mongo.Types.ObjectId(user_id);
+        event_id = new mongo.Types.ObjectId(event_id);
+
+        await registerManager.deleteOne({user_id, event_id});
+        return {success:true}
     }catch(err){
         throw new Error("Some Error Occurred: "+err);
     }
@@ -77,4 +78,4 @@ async function getSingleRegistrationDB(id) {
     }
 }
 
-module.exports = {createRegistrationDB, getSingleRegistrationDB, getUserRegisteredByEventId }
+module.exports = {createRegistrationDB, getSingleRegistrationDB, deleteRegistrationDB }

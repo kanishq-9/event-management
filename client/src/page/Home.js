@@ -21,7 +21,7 @@ function Home() {
     try{
       const id = sessionStorage.getItem("id");
       const response = await fetch(URL+`/api/users/${id}/registrations`);
-      const data = await response.json();
+      const data = await response.json();      
       if(data.success){
         setUserRegistrationData(data.data);
       }
@@ -29,7 +29,7 @@ function Home() {
     }catch(err){
       console.error('Error fetching: '+ err);
     }
-  },[URL])
+  },[URL]);
 
 
 
