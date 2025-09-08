@@ -8,7 +8,10 @@ async function getEventById(id) {
         }
         
         const _id = new mongo.Types.ObjectId(id);
-        let response = await eventManager.findOne({ _id });        
+        let response = await eventManager.findOne({ _id });
+        if(!response){
+            return {success:false, message:"Event not found. Maybe Admin Deleted the event."};
+        }      
         response= response.toObject();
         const usersRegistered = await getUserRegisteredByEventId(id); 
         response["total_registered"] = usersRegistered.success ? usersRegistered.data.length : 0;
