@@ -81,7 +81,7 @@ function Viewcard({
 
     return (
         <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-flex justify-content-center align-items-center" style={{ zIndex: 1050 }}>
-            <div className="bg-white rounded shadow-lg p-4" style={{ width: "400px" }}>
+            <div className="bg-white text-dark rounded shadow-lg p-4" style={{ width: "400px" }}>
                 {cardMessage ?
                     (<div>
                         <h4 className="mb-3">Event</h4>
