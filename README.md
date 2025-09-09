@@ -132,4 +132,4 @@ helmet.contentSecurityPolicy({
 ==> Register a new user
 
 # Preview
-![demo](output3.mp4)
+![demo](output3.gif)
