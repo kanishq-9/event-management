@@ -130,3 +130,6 @@ helmet.contentSecurityPolicy({
 
 - POST /api/auth/register
 ==> Register a new user
+
+# Preview
+![demo](output3.mp4)
