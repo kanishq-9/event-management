@@ -93,3 +93,40 @@ helmet.contentSecurityPolicy({
 ```
 # Architecture
 <img width="849" height="397" alt="MERNArchitecture" src="https://github.com/user-attachments/assets/b8d1934b-5fa6-46b5-9661-55f7f3d5b2b7" />
+
+# API Documentation
+## Event Management
+
+- POST /api/events
+==> Create a new event (title, description, date, location, etc.)
+
+- GET /api/events
+==> List all upcoming events
+
+- GET /api/events/:id
+==> Get event details with registration count
+
+- PUT /api/events/:id
+==> Update event (only by creator)
+
+- DELETE /api/events/:id
+==> Delete event (only by creator)
+
+## User Registration
+
+- POST /api/events/:id/register
+==> Register for an event
+
+- DELETE /api/events/:id/register
+==> Cancel registration
+
+- GET /api/users/:id/registrations
+==> Get user’s registrations
+
+## Authentication
+
+- POST /api/auth/login
+==> Login using email (returns token/session)
+
+- POST /api/auth/register
+==> Register a new user
